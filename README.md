@@ -42,7 +42,15 @@ _Source: trudedata.in_
 | `os`             | File management (Excel updates)        |
 
 ---
+## Project Structure
 
+```bash
+nifty-engulfing-detect/
+├── mtf_trading_paper.py     # Main script for detection
+├── kiteGetAccessToken.py    # Kite access token generation
+├── kiteSettings.py          # Kite API dependencies
+├── MTF_Trading.xlsx             # Excel output file (updated live)
+└── README.md
 
 ## Note on Usage
 You will need API credentials from Kite Connect to use this tool.
