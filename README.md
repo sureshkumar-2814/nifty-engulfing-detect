@@ -49,7 +49,7 @@ nifty-engulfing-detect/
 ├── mtf_trading_paper.py     # Main script for detection
 ├── kiteGetAccessToken.py    # Kite access token generation
 ├── kiteSettings.py          # Kite API dependencies
-├── MTF_Trading.xlsx             # Excel output file (updated live)
+├── MTF_Trading.xlsx         # Excel output file (updated live)
 └── README.md
 
 ## Note on Usage
