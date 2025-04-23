@@ -1,6 +1,9 @@
 #kiteGetAccessToken.py
 
 import logging
+import sys
+sys.path.append("E:/")
+
 import kiteSettings
 from kiteconnect import KiteConnect
 

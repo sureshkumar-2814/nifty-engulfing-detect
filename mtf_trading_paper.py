@@ -5,6 +5,11 @@ import threading
 from datetime import datetime, timedelta
 from datetime import time as dtime
 from kiteconnect import KiteConnect
+import sys
+sys.path.append("E:/")
+
+
+
 import kiteSettings
 
 # Authenticate with Kite Connect
