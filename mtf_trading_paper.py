@@ -134,9 +134,9 @@ def analyze():
             args=(row["Stock Name"], row["Buy/Trigger Price"])
         ).start()
     now_time = datetime.now().time()
-    cutoff_time = dtime(15, 15, 10)
+    cutoff_time = dtime(15, 15, 0)
     while now_time < cutoff_time:
-        now_time = datetime.now().time()
+        
         print(f"\n--- Analyzing at {datetime.now().strftime('%H:%M:%S')} ---")
         df = read_excel()
         active_count = len(df[df["Active"] == "Yes"])
@@ -173,6 +173,7 @@ def analyze():
 
         # wait for the next 30-minute boundary (xx:15 or xx:45)
         now = datetime.now()
+        now_time = datetime.now().time()
         next_min = 15 if now.minute < 15 else 45 if now.minute < 45 else 75
         next_time = now.replace(minute=next_min % 60, second=5, microsecond=0)
         if next_min >= 60:
