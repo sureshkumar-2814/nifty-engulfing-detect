@@ -17,7 +17,7 @@ api_key = kiteSettings.api_key
 access_token = kiteSettings.access_token
 
 EXCEL_FILE = "MTF_Trading.xlsx"
-MAX_ACTIVE_TRADES = 5
+MAX_ACTIVE_TRADES = 100
 MONITOR_INTERVAL = 10  # seconds
 stocks = [
     "ADANIENT", "ADANIPORTS", "APOLLOHOSP", "ASIANPAINT", "AXISBANK",
@@ -55,7 +55,9 @@ def is_bullish_engulfing(prev, curr):
         prev['close'] < prev['open'] and
         curr['close'] > curr['open'] and
         curr['open'] < prev['close'] and
-        curr['close'] > prev['open']
+        curr['close'] > prev['open'] and
+        prev['high'] < curr['high'] and
+        prev['low'] > curr['low']
     )
 
 # --------------------- MONITOR TRADES ------------------------ #
@@ -110,8 +112,8 @@ def fetch_completed_candles(stock):
         df["date"] = pd.to_datetime(df["date"]).dt.tz_localize(None)
 
         # Drop the last incomplete candle if present
-        now = datetime.now()
-        df = df[df["date"] < now]
+        #now = datetime.now()
+        #df = df[df["date"] < now]
 
         return df.tail(2)
     except Exception as e:
@@ -124,10 +126,10 @@ def analyze():
     start_time = datetime.now().replace(hour=10, minute=15, second=0, microsecond=0)
     if datetime.now() < start_time:
         time.sleep((start_time - datetime.now()).total_seconds())
-
+    
     # Resume monitoring previously active trades
     df = read_excel()
-    active_trades = df[df["Active"] == "Yes"]
+    active_trades = 0
     for _, row in active_trades.iterrows():
         threading.Thread(
             target=monitor_trade,
